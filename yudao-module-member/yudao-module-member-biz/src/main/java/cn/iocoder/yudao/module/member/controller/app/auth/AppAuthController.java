@@ -42,6 +42,15 @@ public class AppAuthController {
     @Resource
     private SecurityProperties securityProperties;
 
+    @PostMapping("/register")
+    @Operation(summary = "注册用户")
+    @PermitAll
+    public CommonResult<Boolean> register(@RequestBody @Valid AppAuthRegisterReqVO reqVO) {
+        authService.register(reqVO);
+        return success(true);
+    }
+
+
     @PostMapping("/login")
     @Operation(summary = "使用手机 + 密码登录")
     @PermitAll

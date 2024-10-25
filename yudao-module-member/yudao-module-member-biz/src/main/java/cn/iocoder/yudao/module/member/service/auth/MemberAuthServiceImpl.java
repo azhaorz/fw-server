@@ -62,6 +62,14 @@ public class MemberAuthServiceImpl implements MemberAuthService {
     private OAuth2TokenApi oauth2TokenApi;
 
     @Override
+    public void register(AppAuthRegisterReqVO reqVO) {
+        String userIp = getClientIP();
+
+        // 创建用户
+        userService.registerUser(reqVO.getMobile(), reqVO.getPassword(), userIp, getTerminal());
+    }
+
+    @Override
     public AppAuthLoginRespVO login(AppAuthLoginReqVO reqVO) {
         // 使用手机 + 密码，进行登录。
         MemberUserDO user = login0(reqVO.getMobile(), reqVO.getPassword());

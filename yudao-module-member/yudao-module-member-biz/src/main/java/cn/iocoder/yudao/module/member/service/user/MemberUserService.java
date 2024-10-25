@@ -20,6 +20,17 @@ import java.util.List;
 public interface MemberUserService {
 
     /**
+     * 注册用户
+     *
+     * @param mobile     手机号
+     * @param password   密码
+     * @param registerIp 注册 IP
+     * @param terminal   终端 {@link TerminalEnum}
+     * @return 用户对象
+     */
+    void registerUser(@Mobile String mobile, String password, String registerIp, Integer terminal);
+
+    /**
      * 通过手机查询用户
      *
      * @param mobile 手机

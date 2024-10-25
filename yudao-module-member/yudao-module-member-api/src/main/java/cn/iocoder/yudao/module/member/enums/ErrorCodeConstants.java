@@ -11,6 +11,7 @@ public interface ErrorCodeConstants {
 
     // ========== 用户相关  1-004-001-000 ============
     ErrorCode USER_NOT_EXISTS = new ErrorCode(1_004_001_000, "用户不存在");
+    ErrorCode USER_EXISTS = new ErrorCode(1_004_001_000, "用户已存在");
     ErrorCode USER_MOBILE_NOT_EXISTS = new ErrorCode(1_004_001_001, "手机号未注册用户");
     ErrorCode USER_MOBILE_USED = new ErrorCode(1_004_001_002, "修改手机失败，该手机号({})已经被使用");
     ErrorCode USER_POINT_NOT_ENOUGH = new ErrorCode(1_004_001_003, "用户积分余额不足");

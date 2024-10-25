@@ -65,6 +65,23 @@ public class MemberUserServiceImpl implements MemberUserService {
     private MemberUserProducer memberUserProducer;
 
     @Override
+    public void registerUser(String mobile, String password, String registerIp, Integer terminal) {
+        if (memberUserMapper.selectByMobile(mobile) != null) {
+            throw exception(USER_EXISTS);
+        }
+
+        // 插入用户
+        MemberUserDO user = new MemberUserDO();
+        user.setMobile(mobile);
+        user.setStatus(CommonStatusEnum.ENABLE.getStatus()); // 默认开启
+        user.setPassword(encodePassword(password)); // 加密密码
+        user.setRegisterIp(registerIp).setRegisterTerminal(terminal);
+        // 昵称为空时，随机一个名字，避免一些依赖 nickname 的逻辑报错，或者有点丑。例如说，短信发送有昵称时~
+        user.setNickname("用户" + RandomUtil.randomNumbers(6));
+        memberUserMapper.insert(user);
+    }
+
+    @Override
     public MemberUserDO getUserByMobile(String mobile) {
         return memberUserMapper.selectByMobile(mobile);
     }

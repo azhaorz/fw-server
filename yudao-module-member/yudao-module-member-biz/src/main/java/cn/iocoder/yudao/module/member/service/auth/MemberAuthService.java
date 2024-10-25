@@ -12,6 +12,12 @@ import jakarta.validation.Valid;
  * @author 芋道源码
  */
 public interface MemberAuthService {
+    /**
+     * 注册用户
+     *
+     * @param reqVO 注册信息
+     */
+    void register(AppAuthRegisterReqVO reqVO);
 
     /**
      * 手机 + 密码登录
@@ -84,5 +90,4 @@ public interface MemberAuthService {
      * @return 登录结果
      */
     AppAuthLoginRespVO refreshToken(String refreshToken);
-
 }
