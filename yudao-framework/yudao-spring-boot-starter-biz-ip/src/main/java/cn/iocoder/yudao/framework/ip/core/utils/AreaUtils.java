@@ -173,6 +173,33 @@ public class AreaUtils {
     }
 
     /**
+     * 获取区域编号列表
+     * @param id 区域编号
+     * @return 区域编号列表
+     */
+    public static ArrayList<Integer> getAreaIdList(Integer id) {
+        // 获得区域
+        Area area = getArea(id);
+        if (area == null) {
+            return null;
+        }
+
+        ArrayList<Integer> areaIdList = new ArrayList<>();
+
+        for (int i = 0; i < AreaTypeEnum.values().length; i++) { // 避免死循环
+            areaIdList.add(0, area.getId()); // 添加到列表开头
+            // “递归”父节点
+            area = area.getParent();
+            if (area == null
+                    || ObjectUtils.equalsAny(area.getId(), Area.ID_GLOBAL, Area.ID_CHINA)) { // 跳过父节点为中国的情况
+                break;
+            }
+        }
+
+        return areaIdList;
+    }
+
+    /**
      * 获取指定类型的区域列表
      *
      * @param type 区域类型
